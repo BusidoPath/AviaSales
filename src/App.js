@@ -1,25 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import Main from './components/Main'
+
+import axios from 'axios'
+import axiosRetry from 'axios-retry';
+
 
 function App() {
+
+  const [ticketsId, setticketsId] = useState()
+  const [tickets, settickets] = useState([])
+  const [ticketsPerPage, setticketsPerPage] = useState(5)
+  const client = axios.create();
+  axiosRetry(client, { retries: 3 })
+
+  const getData = async (ticketsId, savedData) => {
+    const result = await client.get(`https://front-test.beta.aviasales.ru/tickets?searchId=${ticketsId}`);
+    if (!result.data.stop) {
+      return getData(ticketsId, [...savedData, ...result.data.tickets])
+    }
+    else return [...savedData, ...result.data.tickets]
+  }
+
+  useEffect(() => {
+
+    axios.get('https://front-test.beta.aviasales.ru/search').then(({ data }) => {
+      setticketsId(data.searchId)
+    })
+
+  }, [])
+
+  useEffect(() => {
+    ticketsId && getData(ticketsId, []).then((data) => {
+      settickets(data)
+
+    })
+  }, [ticketsId])
+
+
+  const lastTicketIndex = ticketsPerPage
+  const firstTicketIndex = lastTicketIndex - ticketsPerPage
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Main
+      className="main"
+      ticketsPerPage={ticketsPerPage}
+      setticketsPerPage={setticketsPerPage}
+      ticketsLength={tickets.length}
+      tickets={tickets}
+      firstTicketIndex={firstTicketIndex}
+      lastTicketIndex={lastTicketIndex}
+    ></Main>
   );
 }
 
+
+
 export default App;
+

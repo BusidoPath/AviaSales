@@ -1,0 +1,51 @@
+
+
+
+.sort-block{
+    background-color: white;
+    width: 502px;
+    height: 50px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    .sort-buttons{
+        display: flex;
+        justify-content: space-between;
+        list-style-type: none;
+        height: 100%;
+        width: 100%;
+        .active{
+            background: #2196F3;
+            color: #FFFFFF;
+            border: 1px solid #2196F3;
+           
+        }
+        button{
+            
+            cursor: pointer;
+            margin: 0;
+            border:0;
+            padding: 20px;
+            background: #FFFFFF;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            border-left: 1px solid #DFE5EC;
+            width: 100%;
+            &:first-child {
+                border-bottom-left-radius: 5px;
+                border-top-left-radius: 5px;
+            }
+              &:last-child {
+                border-right: 1px solid #DFE5EC;
+                border-bottom-right-radius: 5px;
+                border-top-right-radius: 5px;
+             }
+        }
+    }
+}
+
+
+
