@@ -13,13 +13,7 @@ function App() {
   const client = axios.create();
   axiosRetry(client, { retries: 3 })
 
-  const getData = async (ticketsId, savedData) => {
-    const result = await client.get(`https://front-test.beta.aviasales.ru/tickets?searchId=${ticketsId}`);
-    if (!result.data.stop) {
-      return getData(ticketsId, [...savedData, ...result.data.tickets])
-    }
-    else return [...savedData, ...result.data.tickets]
-  }
+
 
   useEffect(() => {
 
@@ -30,6 +24,13 @@ function App() {
   }, [])
 
   useEffect(() => {
+    const getData = async (ticketsId, savedData) => {
+      const result = await client.get(`https://front-test.beta.aviasales.ru/tickets?searchId=${ticketsId}`);
+      if (!result.data.stop) {
+        return getData(ticketsId, [...savedData, ...result.data.tickets])
+      }
+      else return [...savedData, ...result.data.tickets]
+    }
     ticketsId && getData(ticketsId, []).then((data) => {
       settickets(data)
 
