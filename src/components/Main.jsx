@@ -34,7 +34,6 @@ function Main({ ticketsPerPage, tickets, ticketsLength, setticketsPerPage, first
     const [sortType, setsortType] = useState(0)
     const [sortedTickets, setsortedTickets] = useState(tickets)
     const [filteredTickets, setfilteredTickets] = useState([])
-    const [Loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         const copiedTickets = [...tickets]
@@ -58,6 +57,9 @@ function Main({ ticketsPerPage, tickets, ticketsLength, setticketsPerPage, first
                     return a.segments.reduce((acc, elem) => (acc += elem.duration), 0) / a.price - b.segments.reduce((acc, elem) => (acc += elem.duration), 0) / b.price
                 })
                 break
+            }
+            default: {
+                return 0
             }
         }
 
