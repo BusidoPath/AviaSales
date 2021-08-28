@@ -5,9 +5,18 @@ import Sort from './Sort'
 import MyLoader from './MyLoader'
 import '../scss/index.scss'
 
+
 import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types';
 
-
+Main.propTypes = {
+    ticketsPerPage: PropTypes.number,
+    tickets: PropTypes.array,
+    ticketsLength: PropTypes.number,
+    setticketsPerPage: PropTypes.func,
+    firstTicketIndex: PropTypes.number,
+    lastTicketIndex: PropTypes.number
+}
 
 const FilterItems = [
     { name: 'Без пересадок', checked: true, id: 1 },

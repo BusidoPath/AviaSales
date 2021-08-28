@@ -1,6 +1,14 @@
 import React from 'react'
 
+import PropTypes from 'prop-types';
 
+Sort.propTypes = {
+    items: PropTypes.shape({
+        name: PropTypes.string
+    }),
+    sortType: PropTypes.number,
+    setsortType: PropTypes.func,
+}
 
 function Sort({ items, sortType, setsortType }) {
 

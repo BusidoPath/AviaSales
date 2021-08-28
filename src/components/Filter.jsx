@@ -1,7 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-
-
+Filter.propTypes = {
+    activeItem: PropTypes.shape({
+        name: PropTypes.string,
+        checked: PropTypes.bool,
+        id: PropTypes.number
+    }),
+    setActiveItem: PropTypes.func,
+    FilterAll: PropTypes.bool,
+    setFilterAll: PropTypes.func
+}
 
 function Filter({ activeItem, setActiveItem, FilterAll, setFilterAll }) {
 

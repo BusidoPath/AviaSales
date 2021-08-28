@@ -1,5 +1,30 @@
 import React from 'react'
 import dayjs from 'dayjs'
+import PropTypes from 'prop-types';
+
+Tickets.propTypes = {
+    elem: PropTypes.shape({
+        price: PropTypes.number,
+        carrier: PropTypes.string,
+        segments: PropTypes.arrayOf(PropTypes.oneOfType([
+            PropTypes.shape({
+                origin: PropTypes.string,
+                destination: PropTypes.string,
+                date: PropTypes.string,
+                stops: PropTypes.arrayOf(PropTypes.string),
+                duration: PropTypes.number,
+            }),
+            PropTypes.shape({
+                origin: PropTypes.string,
+                destination: PropTypes.string,
+                date: PropTypes.string,
+                stops: PropTypes.arrayOf(PropTypes.string),
+                duration: PropTypes.number,
+            })
+        ]))
+    })
+}
+
 
 function Tickets({ elem }) {
 
