@@ -10,8 +10,6 @@ function App() {
   const [ticketsId, setticketsId] = useState()
   const [tickets, settickets] = useState([])
   const [ticketsPerPage, setticketsPerPage] = useState(5)
-  const client = axios.create();
-  axiosRetry(client, { retries: 3 })
 
 
 
@@ -25,6 +23,8 @@ function App() {
 
   useEffect(() => {
     const getData = async (ticketsId, savedData) => {
+      const client = axios.create();
+      axiosRetry(client, { retries: 3 })
       const result = await client.get(`https://front-test.beta.aviasales.ru/tickets?searchId=${ticketsId}`);
       if (!result.data.stop) {
         return getData(ticketsId, [...savedData, ...result.data.tickets])
